@@ -36,20 +36,25 @@ bool is_empty(struct Stack **stack) {
   return false;
 }
 
-int free_node(struct Stack *stack) {
-  if (is_empty(&stack)) {
+int free_node(struct Stack **stack) {
+  if (is_empty(stack)) {
     printf("Error underflow");
     exit(1);
   };
-  int info = stack->info;
-  stack = stack->next;
+  struct Stack *temp = *stack;
+  int info = temp->info;
+  *stack = temp->next;
+  free(temp);
   return info;
 }
 
 int main() {
   struct Stack *stack;
-  assert(is_empty(&stack) == true);
-  // get_node(&stack, 43);
-  // printf("some tings %d", stack->info);
-  // printf("some tings %d", stack->next->info);
+  get_node(&stack, 1);
+  get_node(&stack, 2);
+  get_node(&stack, 3);
+  printf("The node is freed so we get following value %d\n", free_node(&stack));
+  printf("The node is freed so we get following value %d\n", free_node(&stack));
+  printf("The node is freed so we get following value %d\n", free_node(&stack));
+  printf("The node is freed so we get following value %d\n", free_node(&stack));
 }
