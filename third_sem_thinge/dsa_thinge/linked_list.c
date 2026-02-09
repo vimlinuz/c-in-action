@@ -13,7 +13,7 @@ struct Stack {
 };
 
 // this will generate new enpty node
-void get_node(struct Stack *stack, int info) {
+void get_node(struct Stack **stack, int info) {
   struct Stack *newnode;
   newnode = (struct Stack *)malloc(sizeof(struct Stack));
 
@@ -25,19 +25,19 @@ void get_node(struct Stack *stack, int info) {
 
   // Initialization of the newnode  with some empty content
   newnode->info = info;
-  newnode->next = stack;
-  stack = newnode;
+  newnode->next = *stack;
+  *stack = newnode;
 }
 
-bool is_empty(struct Stack *stack) {
-  if (stack == NULL) {
+bool is_empty(struct Stack **stack) {
+  if (*stack == NULL) {
     return true;
   }
   return false;
 }
 
 int free_node(struct Stack *stack) {
-  if (is_empty(stack)) {
+  if (is_empty(&stack)) {
     printf("Error underflow");
     exit(1);
   };
@@ -47,9 +47,9 @@ int free_node(struct Stack *stack) {
 }
 
 int main() {
-  struct Stack *stack = (struct Stack *)malloc(sizeof(struct Stack));
-  stack->info = 12;
-  get_node(stack, 43);
-  printf("some tings %d", stack->info);
-  printf("some tings %d", stack->next->info);
+  struct Stack *stack;
+  assert(is_empty(&stack) == true);
+  // get_node(&stack, 43);
+  // printf("some tings %d", stack->info);
+  // printf("some tings %d", stack->next->info);
 }
