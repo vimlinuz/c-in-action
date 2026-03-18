@@ -40,9 +40,10 @@ void printBits(int arr[]) {
 }
 
 int main() {
+  // Initially the emultiplicand is in register B and the multiplier in Q.
   int b, q;
 
-  printf("***** 8-BIT SIGNED MAGNITUDE MULTIPLICATION *****\n");
+  printf(" 8-bit signed magnitude multiplication \n");
 
   do {
     printf("Enter B (-127 to 127): ");
