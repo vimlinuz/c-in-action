@@ -1,44 +1,40 @@
 #include <conio.h>
 #include <graphics.h>
-#include <math.h>
-#include <stdio.h>
 
-char IncFlag;
-int PolygonPoints[3][2] = {{10, 100}, {110, 100}, {110, 200}};
+int PolygonPoints[3][2] = {{50, 50}, {100, 50}, {75, 100}};
+
 void PolyLine() {
-  int iCnt;
+  int i;
   cleardevice();
-  line(0, 240, 640, 240);
-  line(320, 0, 320, 480);
-  for (iCnt = 0; iCnt < 3; iCnt++) {
-    line(PolygonPoints[iCnt][0], PolygonPoints[iCnt][1],
-         PolygonPoints[(iCnt + 1) % 3][0], PolygonPoints[(iCnt + 1) % 3][1]);
+  line(0, 240, 640, 240); // x-axis
+  line(320, 0, 320, 480); // y-axis
+  for (i = 0; i < 3; i++) {
+    line(PolygonPoints[i][0], PolygonPoints[i][1],
+         PolygonPoints[(i + 1) % 3][0], PolygonPoints[(i + 1) % 3][1]);
   }
 }
 
 void Reflect() {
-  float Angle;
-  int iCnt;
-  int Tx, Ty;
-  printf("endl");
-  ;
-  for (iCnt = 0; iCnt < 3; iCnt++) {
-    PolygonPoints[iCnt][1] = (480 - PolygonPoints[iCnt][1]);
+  int i;
+  for (i = 0; i < 3; i++) {
+    PolygonPoints[i][0] =
+        2 * 320 - PolygonPoints[i][0]; // Reflect about y-axis (x=320)
   }
 }
 
-void main() {
-  int gDriver = DETECT, gMode;
-
-  int iCnt;
-  initgraph(&gDriver, &gMode, "C:\\Turboc3\\BGI");
-  for (iCnt = 0; iCnt < 3; iCnt++) {
-    PolygonPoints[iCnt][0] += 320;
-    PolygonPoints[iCnt][1] += 240 - PolygonPoints[iCnt][1];
+int main() {
+  int gd = DETECT, gm, i;
+  initgraph(&gd, &gm, "C:\\Turboc3\\BGI");
+  // Move polygon to center
+  for (i = 0; i < 3; i++) {
+    PolygonPoints[i][0] += 270; // Center horizontally (320 - 50)
+    PolygonPoints[i][1] += 140; // Center vertically (240 - 100)
   }
   PolyLine();
   getch();
   Reflect();
   PolyLine();
   getch();
+  closegraph();
+  return 0;
 }
