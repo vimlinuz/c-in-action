@@ -13,7 +13,7 @@ struct Stack {
 };
 
 // this will generate new enpty node
-void get_node(struct Stack **stack, int info) {
+void insert_element(struct Stack **stack, int info) {
   struct Stack *newnode;
   newnode = (struct Stack *)malloc(sizeof(struct Stack));
 
@@ -50,9 +50,9 @@ int free_node(struct Stack **stack) {
 
 int main() {
   struct Stack *stack;
-  get_node(&stack, 1);
-  get_node(&stack, 2);
-  get_node(&stack, 3);
+  insert_element(&stack, 1);
+  insert_element(&stack, 2);
+  insert_element(&stack, 3);
   printf("The node is freed so we get following value %d\n", free_node(&stack));
   printf("The node is freed so we get following value %d\n", free_node(&stack));
   printf("The node is freed so we get following value %d\n", free_node(&stack));
