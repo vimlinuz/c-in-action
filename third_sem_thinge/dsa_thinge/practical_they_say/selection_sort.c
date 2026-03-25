@@ -9,10 +9,11 @@ void selection_sort(int unsorted[], int length) {
         min_index = j;
       }
     }
-
-    int temp = unsorted[min_index];
-    unsorted[min_index] = unsorted[i];
-    unsorted[i] = temp;
+    if (!(min_index == i)) {
+      int temp = unsorted[min_index];
+      unsorted[min_index] = unsorted[i];
+      unsorted[i] = temp;
+    }
   }
 }
 
