@@ -17,8 +17,8 @@ void PolyLine() {
 void Reflect() {
   int i;
   for (i = 0; i < 3; i++) {
-    PolygonPoints[i][1] =
-        2 * 240 - PolygonPoints[i][1]; // Reflect about x-axis (y=240)
+    PolygonPoints[i][0] =
+        2 * 320 - PolygonPoints[i][0]; // Reflect about y-axis (x=320)
   }
 }
 
