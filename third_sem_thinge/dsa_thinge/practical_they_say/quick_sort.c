@@ -8,24 +8,35 @@ void swap(int *a, int *b) {
 }
 
 int partition(int arr[], int low, int high) {
+  // we are just picking the last element as pivot element
   int pivot = arr[high];
-  int i = low - 1, j;
 
-  for (j = low; j < high; j++) {
+  // is the index of smaller element also called the boundary
+  //  it is initialized one index less then the low index because we will be
+  //  incrementing it before swapping
+  int i = low - 1;
+
+  for (int j = low; j < high; j++) {
     if (arr[j] < pivot) {
       i++;
       swap(&arr[i], &arr[j]);
     }
   }
 
+  // placing the pivot in the correct position by swapping it with the element
+  // at index i + 1
   swap(&arr[i + 1], &arr[high]);
 
+  // returning the index of the pivot element after partitioning
   return i + 1;
 }
 
 void quick_sort(int arr[], int low, int high) {
   if (low < high) {
     int pi = partition(arr, low, high);
+
+    // calling the quick_sort function recursively on the left and right
+    // subarrays
     quick_sort(arr, low, pi - 1);
     quick_sort(arr, pi + 1, high);
   }
