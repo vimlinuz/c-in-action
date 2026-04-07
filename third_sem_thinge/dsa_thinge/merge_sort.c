@@ -1,3 +1,5 @@
+#include <assert.h>
+#include <stdio.h>
 void merge(int left_array[], int right_array[], int array[], int length) {
   int left_size = length / 2;
   int right_size = length - left_size;
@@ -35,7 +37,7 @@ void merge(int left_array[], int right_array[], int array[], int length) {
 }
 
 void merge_sort(int array[], int length) {
-  if (length <= 0) {
+  if (length <= 1) {
     return;
   } else {
     int middle = length / 2;
@@ -56,6 +58,7 @@ void merge_sort(int array[], int length) {
       } else {
         //  copying the right half of the array to right_array
         right_array[j] = array[i];
+        j++;
       }
     }
     merge_sort(left_array, middle);
@@ -68,6 +71,12 @@ void merge_sort(int array[], int length) {
 int main() {
   int array[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
   int length = sizeof(array) / sizeof(array[0]);
+
   merge_sort(array, length);
+
+  printf("Sorted array: ");
+  for (int i = 0; i < length; i++) {
+    printf("%d ", array[i]);
+  }
   return 0;
 }
