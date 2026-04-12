@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdatomic.h>
-#include <stdio.h>
 #define MAXSIZE 10
+#define bool int
 #define true 1
 #define false 0
 
@@ -10,13 +10,13 @@ typedef struct Stack {
   int items[MAXSIZE];
 } stack;
 
-int isfull(stack *stack) {
+bool isfull(stack *stack) {
   if (stack->tos == MAXSIZE)
     return true;
   return false;
 }
 
-int isempty(stack *stack) {
+bool isempty(stack *stack) {
   if (stack->tos == -1)
     return true;
   return false;
@@ -35,7 +35,7 @@ int pop(stack *stack) {
     stack->tos--;
     return content;
   } else {
-    return 0;
+    return 0; // underflow
   }
 }
 
@@ -79,6 +79,7 @@ void pop_empty_test() {
   stack my_stack;
   my_stack.tos = -1;
   int result = pop(&my_stack);
+  // under flow so will return 0
   assert(result == 0);
 }
 
