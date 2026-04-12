@@ -14,21 +14,20 @@ typedef struct {
 } Queue;
 
 void initialize_queue(Queue *q) {
-  q->front = -1;
-  q->rear = 0;
+  q->rear = -1;
+  q->front = 0;
 }
 
-bool is_empty(Queue *q) { return (q->front == q->rear - 1); }
+bool is_empty(Queue *q) { return (q->rear < q->front - 1); }
 
-bool is_full(Queue *q) { return (q->rear == MAX_SIZE); }
+bool is_full(Queue *q) { return (q->rear == MAX_SIZE - 1); }
 
 void enqueue(Queue *q, int value) {
   if (is_full(q)) {
     printf("Queue is full\n");
     return;
   }
-  q->items[q->rear] = value;
-  q->rear++;
+  q->items[++q->rear] = value;
 }
 
 int dequeue(Queue *q) {
@@ -36,7 +35,7 @@ int dequeue(Queue *q) {
     printf("Underflow: Queue is empty\n");
     exit(1);
   }
-  return q->items[++q->front];
+  return q->items[q->front++];
 }
 
 int peek(Queue *q) {
@@ -44,7 +43,7 @@ int peek(Queue *q) {
     printf("Underflow: Queue is empty\n");
     exit(1);
   }
-  return q->items[q->front + 1];
+  return q->items[q->front];
 }
 
 int main() {
