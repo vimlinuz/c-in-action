@@ -27,8 +27,8 @@ void enqueue(Queue *q, int value) {
     printf("Queue is full\n");
     return;
   }
-  q->items[q->rear] = value;
   q->rear = (q->rear + 1) % MAX_SIZE;
+  q->items[q->rear] = value;
 }
 
 int dequeue(Queue *q) {
@@ -36,7 +36,8 @@ int dequeue(Queue *q) {
     printf("Underflow: Queue is empty\n");
     exit(1);
   }
-  return q->items[(q->front++) % MAX_SIZE];
+  q->front = (q->front + 1) % MAX_SIZE;
+  return q->items[q->front];
 }
 
 int peek(Queue *q) {
