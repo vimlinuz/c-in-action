@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdatomic.h>
+#include <stdio.h>
 #define MAXSIZE 10
 #define bool int
 #define true 1
@@ -44,6 +45,12 @@ int peek(stack *stack) {
     return stack->items[stack->tos];
   } else {
     return 0; // underflow
+  }
+}
+
+void traverse(stack *stack) {
+  for (int i = stack->tos; i >= 0; i--) {
+    printf("%d ", stack->items[i]);
   }
 }
 
