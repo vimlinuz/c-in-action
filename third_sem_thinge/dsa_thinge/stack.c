@@ -39,6 +39,14 @@ int pop(stack *stack) {
   }
 }
 
+int peek(stack *stack) {
+  if (!isempty(stack)) {
+    return stack->items[stack->tos];
+  } else {
+    return 0; // underflow
+  }
+}
+
 void isempty_test() {
   stack my_stack;
   my_stack.tos = -1;
@@ -93,6 +101,14 @@ void push_pop_sequence_test() {
   assert(isempty(&my_stack) == true);
 }
 
+void peek_test() {
+  stack my_stack;
+  my_stack.tos = -1;
+  push(&my_stack, 42);
+  assert(peek(&my_stack) == 42);
+  assert(isempty(&my_stack) == false); // peek should not remove the item
+}
+
 int main() {
   push_multiple_test();
   pop_empty_test();
@@ -101,5 +117,6 @@ int main() {
   isfull_test();
   push_test();
   pop_test();
+  peek_test();
   return 0;
 }
